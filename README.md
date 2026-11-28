@@ -118,7 +118,7 @@ works):
 ```bash
 conda create -n dynalyst python=3.11 -y
 conda activate dynalyst
-pip install torch
+pip install "torch>=2.6"
 pip install "jax==0.4.35"
 pip install -e vendor/jaxkineticmodel
 pip install -r requirements.txt

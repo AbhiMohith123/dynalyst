@@ -27,12 +27,10 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "${ENV_NAME}"
 
 echo "== Installing PyTorch (used only by the RAG embedding/rerank models) =="
-if [ "$GPU_AVAILABLE" -eq 1 ]; then
-  # Match the index URL to your driver's CUDA version (`nvidia-smi`, top right).
-  pip install torch --index-url https://download.pytorch.org/whl/cu121
-else
-  pip install torch
-fi
+# transformers needs torch >= 2.6 (with an older torch it switches torch off and the RAG
+# tools fail with "NameError: name 'nn' is not defined"). The torch wheels on PyPI already
+# include CUDA on Linux; the old cu121 index stops at torch 2.5.1, so it is not used.
+pip install "torch>=2.6"
 
 echo "== Installing JAX (jaxkineticmodel pins jax 0.4.35) =="
 # CPU JAX by default: the agent's simulations are small, and the CUDA build of jax 0.4.35

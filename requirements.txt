@@ -33,8 +33,9 @@ diffrax
 equinox
 optax==0.2.3
 
-# RAG knowledge base (retrieval + index building; install torch first on a
-# GPU machine -- see setup_env.sh)
+# RAG knowledge base (retrieval + index building). transformers needs torch >= 2.6;
+# with an older torch the RAG tools fail with "NameError: name 'nn' is not defined".
+torch>=2.6
 chromadb
 sentence-transformers
 rank-bm25

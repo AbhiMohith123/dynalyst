@@ -261,7 +261,7 @@ conda activate dynalyst
 
 ```bat
 python -m zipfile -e vendor\jaxkineticmodel.zip vendor
-pip install torch
+pip install "torch>=2.6"
 pip install "jax==0.4.35"
 pip install -e vendor\jaxkineticmodel
 pip install -r requirements.txt
@@ -407,4 +407,5 @@ pip install -r env/requirements-lock.txt
 | The notebook cannot import `dynalyst` | Start `jupyter lab` from the activated `dynalyst` environment, inside the `dynalyst` folder. |
 | `404 Not Found` from the language model | The model name is not available to your key. Check the key at build.nvidia.com, or choose another model in the setup cell. |
 | A prompt that uses BioModels, PubMed or OmniPath fails | Check the internet connection; these tools fetch data online. |
+| `NameError: name 'nn' is not defined`, or "Disabling PyTorch because PyTorch >= 2.6 is required" | PyTorch is too old for `transformers`. In the activated environment: `pip install "torch>=2.6"`. |
 | A cell runs for a very long time | *Kernel > Interrupt*. After a restart, run the setup and files cells again. |
