@@ -23,3 +23,7 @@ vendor/auto-07p/bin/*
 !vendor/auto-07p/bin/autox
 vendor/auto-07p/config.log
 vendor/auto-07p/config.status
+
+# Unpacked from vendor/*.zip by scripts/build_auto.py (the zips are the tracked copies)
+vendor/auto-07p/
+vendor/jaxkineticmodel/

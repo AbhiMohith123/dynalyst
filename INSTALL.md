@@ -408,4 +408,5 @@ pip install -r env/requirements-lock.txt
 | `404 Not Found` from the language model | The model name is not available to your key. Check the key at build.nvidia.com, or choose another model in the setup cell. |
 | A prompt that uses BioModels, PubMed or OmniPath fails | Check the internet connection; these tools fetch data online. |
 | `NameError: name 'nn' is not defined`, or "Disabling PyTorch because PyTorch >= 2.6 is required" | PyTorch is too old for `transformers`. In the activated environment: `pip install "torch>=2.6"`. |
+| pip prints "crnt4sbml 0.0.15 requires numpy==1.16.4 … which is incompatible" (and similar lines) | Harmless, ignore it. crnt4sbml is installed with `--no-deps` on purpose: its old version pins cannot be installed on Python 3.11, and it works with the newer packages (the CRNT tests pass). |
 | A cell runs for a very long time | *Kernel > Interrupt*. After a restart, run the setup and files cells again. |
