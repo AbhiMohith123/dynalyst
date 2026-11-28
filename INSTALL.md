@@ -288,8 +288,8 @@ All commands run in the `dynalyst` folder with the environment active (`conda ac
 python scripts/build_auto.py --check
 ```
 
-It must report two folds, at p = -0.3849 and p = 0.3849. To run the test suite as well (no key is needed; about
-780 tests, 1–2 hours with the AUTO tests):
+It must report two folds, at p = -0.3849 and p = 0.3849. To run the test suite as well (no key is needed; the
+command below leaves out the slow AUTO tests and takes a few minutes; `python -m pytest -q` runs everything, 1–2 hours):
 
 ```bash
 python -m pytest -q -m "not auto"
@@ -399,6 +399,7 @@ pip install -r env/requirements-lock.txt
 |---|---|
 | `conda: command not found` right after installing Miniconda | Close the terminal and open a new one (or run `source ~/.bashrc`; on macOS `source ~/.zshrc`). |
 | `conda create` asks you to accept the terms of service | Run the `conda tos accept ...` commands it prints, then repeat the step. |
+| `setup_env.sh` stops at once because the environment `dynalyst` already exists (a second run) | Remove the half-built one with `conda env remove -n dynalyst -y`, then run `bash setup_env.sh` again; or keep it and use another name: `ENV_NAME=dynalyst2 bash setup_env.sh`. |
 | `gfortran` not found, or `FAILED` while building AUTO-07p | Linux and macOS: `conda activate dynalyst`, `conda install -y -c conda-forge gfortran`, `python scripts/build_auto.py`. Windows: `winget install BrechtSanders.WinLibs.POSIX.UCRT`, open a new Anaconda Prompt, `conda activate dynalyst`, `python scripts\build_auto.py`. |
 | `import jax` fails with `TypeError: expected str, bytes or os.PathLike object, not NoneType` | Linux and macOS: `conda env config vars set CUDA_ROOT="$CONDA_PREFIX"`. Windows: `conda env config vars set CUDA_ROOT=%CONDA_PREFIX%`. Then `conda deactivate` and `conda activate dynalyst`. |
 | `No module named 'ipywidgets'` in a notebook | `pip install -e ".[notebook]"`, then restart the kernel (*Kernel > Restart*). |

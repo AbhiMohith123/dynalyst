@@ -5,11 +5,11 @@ from dynalyst import notebook
 
 
 def test_math_delimiters_become_dollars_outside_code():
-    text = "Fast: \(AP, AK\). `\(code\)`\n\[\n\dot{x} = k\,x\n\]\nend"
+    text = "Fast: \\(AP, AK\\). `\\(code\\)`\n\\[\n\\dot{x} = k\\,x\n\\]\nend"
     out = notebook.markdown_math(text)
     assert "Fast: $AP, AK$." in out
-    assert "`\(code\)`" in out                      # code is left as written
-    assert "\n$$\n\dot{x} = k\,x\n$$\n" in out
+    assert "`\\(code\\)`" in out                      # code is left as written
+    assert "\n$$\n\\dot{x} = k\\,x\n$$\n" in out
 
 
 def test_a_figure_is_shown_as_html(monkeypatch):

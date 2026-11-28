@@ -477,8 +477,11 @@ the right scientific conclusion.
 3. **Parameters are discovered, never guessed.** Every tunable quantity counts: global
    parameters, species the model holds fixed, and constants local to a rate law (named
    `<reaction>_<name>`). A parameter the model lacks is rejected before anything runs.
-4. **Window.** A range from the user or the XPP file is used as is. Otherwise a decade either
-   side of the value, widened to three and five decades if nothing is found.
+4. **Window.** A range from the user is used exactly. Otherwise the parameter is swept from
+   10^-3 to 10^3 times its value on a log axis (stretched to cover a range an XPP file
+   declares), and from 10^-5 to 10^5 times its value if that finds no special point; a
+   parameter with a negative value is widened in decades instead. Parameter values in the
+   answer are then given both as values and as log10.
 5. **Labelling** (`regime/taxonomy.classify_diagram`): *bistable* means two stable steady
    states coexist at one parameter value (reported with where); two folds that enclose no
    bistable window are a `single_fold`.
@@ -837,6 +840,7 @@ notebooks/               dynalyst.ipynb; tools/ has one notebook per capability
 scripts/                 build_auto.py, inspect_run.py, summarize_runs.py, model_audit.py,
                          omnipath_live_check.py, tool_sweep.py, make_tool_notebooks.py,
                          ask_dynalyst.py (chat from a JupyterLab cell, plots saved with links)
+notebooks/benchmarks/     the paper's prompts, one notebook per part of the paper, with their model files
 tests/                   unit, numerical, AUTO integration, tool and offline agent tests
 vendor/auto-07p/         AUTO-07p source
 vendor/jaxkineticmodel/  jaxkineticmodel source
@@ -846,9 +850,9 @@ env/requirements-lock.txt  exact versions of the install used for the paper
 outputs/                 everything the tools write (created on first use)
 ```
 
-The evaluation scripts, reference implementations, prompt files and run records of the
-paper are not in this repository; they are in the Zenodo archive of release v1.0.0
-(see [Citing](#citing)).
+The prompts of the paper are in `notebooks/benchmarks/`, one notebook per part of the paper
+(see its `README.md`). The evaluation scripts, reference implementations and run records are
+not in this repository; they are in the Zenodo archive of the paper (see [Citing](#citing)).
 
 `models/` is separate from `data/sbml_models/` on purpose: `pitchfork.xml` and
 `transcritical.xml` exist in both with different models inside.
@@ -922,9 +926,14 @@ measured by the experiments in the paper, with real models and recorded runs.
 ## Citing
 
 Please cite the software (`CITATION.cff`; GitHub shows it under "Cite this repository")
-and the paper that describes it. Release v1.0.0, the version used in the paper, is archived
-on Zenodo together with the paper's evaluation scripts, reference implementations, prompt
-files and run records.
+and the paper that describes it. The paper's runs were made with release v1.0.0, which is
+archived on Zenodo together with the paper's evaluation scripts, reference implementations
+and run records. This release, v1.0.1, differs from it in two defaults: a diagram given no
+range sweeps 10^-3 to 10^3 times the parameter's value on a log axis (v1.0.0: one decade
+either side, widened to three and five), and the limit cycles born at a Hopf point are
+continued in the same run (v1.0.0 asked first in a chat). It also fixes how conservation
+laws are written as total amounts. Numbers the tools compute (fold and Hopf points, steady
+states, periods) are the same.
 
 ---
 
