@@ -1,4 +1,22 @@
-# dynalyst: a bifurcation-analysis agent for biochemical models
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/banner-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/banner-light.png">
+    <img alt="dynalyst: a bifurcation-analysis agent for biochemical models" src="docs/banner-light.png" width="100%">
+  </picture>
+</p>
+
+<p align="center">
+  <a href="https://github.com/dynalyst26/dynalyst/releases"><img alt="release v1.0.1" src="https://img.shields.io/badge/release-v1.0.1-c4b5fd?style=flat-square&labelColor=ede9fe"></a> <a href="pyproject.toml"><img alt="python ≥ 3.10" src="https://img.shields.io/badge/python-%E2%89%A5%203.10-93c5fd?style=flat-square&labelColor=dbeafe"></a> <a href="LICENSE"><img alt="license MIT" src="https://img.shields.io/badge/license-MIT-86efac?style=flat-square&labelColor=dcfce7"></a> <a href="#bifurcation-analysis-auto-07p"><img alt="continuation AUTO-07p" src="https://img.shields.io/badge/continuation-AUTO--07p-f9a8d4?style=flat-square&labelColor=fce7f3"></a> <a href="INSTALL.md"><img alt="runs on Linux | macOS | Windows" src="https://img.shields.io/badge/runs%20on-Linux%20%7C%20macOS%20%7C%20Windows-fcd34d?style=flat-square&labelColor=fef3c7"></a> <a href="#model-inputs-and-saving"><img alt="models SBML · XPPAUT · ODEs" src="https://img.shields.io/badge/models-SBML%20%C2%B7%20XPPAUT%20%C2%B7%20ODEs-fdba74?style=flat-square&labelColor=ffedd5"></a>
+</p>
+
+<p align="center">
+  <b><a href="INSTALL.md">Install</a></b> &nbsp;·&nbsp;
+  <b><a href="notebooks/benchmarks/">Paper prompts</a></b> &nbsp;·&nbsp;
+  <b><a href="#how-it-works">How it works</a></b> &nbsp;·&nbsp;
+  <b><a href="#known-limitations">Limitations</a></b> &nbsp;·&nbsp;
+  <b><a href="#citing">Cite</a></b>
+</p>
 
 `dynalyst` answers plain-language questions about biochemical models by running real
 numerical tools: AUTO-07p for bifurcation diagrams, jaxkineticmodel for simulation and
@@ -16,7 +34,7 @@ Language models plan the work, choose the tools and read their results, errors i
 a short, fixed list of code rules keeps files safe, limits cost, re-checks every result
 numerically, and checks that every number in the answer comes from a tool result.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Contents
 
@@ -34,7 +52,7 @@ numerically, and checks that every number in the answer comes from a tool result
 - [Citing](#citing)
 - [Credits and licenses](#credits-and-licenses)
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## What it can do
 
@@ -51,13 +69,14 @@ numerically, and checks that every number in the answer comes from a tool result
 | **Models and literature** | BioModels search and download, the models behind a paper (PDF, PubMed ID, DOI), PubMed and Europe PMC, UniProt, reading PDFs, mapping a paper's values onto a model, OmniPath network checks |
 | **Inputs** | SBML files, BioModels IDs, XPPAUT `.ode` files, and ODEs typed straight into the request |
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Quick start
 
-**Step-by-step installation for Linux (Ubuntu, Debian, Red Hat and others, with or without `sudo`), macOS and
-Windows is in [`INSTALL.md`](INSTALL.md).** To rerun the prompts of the paper, open the notebooks in
-[`notebooks/benchmarks/`](notebooks/benchmarks/) (see its `README.md`). The short version follows.
+> [!TIP]
+> **Step-by-step installation for Linux (Ubuntu, Debian, Red Hat and others, with or without `sudo`), macOS and
+> Windows is in [`INSTALL.md`](INSTALL.md).** To rerun the prompts of the paper, open the notebooks in
+> [`notebooks/benchmarks/`](notebooks/benchmarks/) (see its `README.md`). The short version follows.
 
 Run every command below from the repository root (the folder that holds `README.md`).
 
@@ -246,7 +265,7 @@ new_chat()        # start a fresh conversation
 
 Everything the tools write (plots, tables, run records) goes to `outputs/`.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## How it works
 
@@ -438,7 +457,7 @@ python scripts/inspect_run.py              # one run: plan versions, tool calls,
 python scripts/summarize_runs.py           # many runs: model calls, tokens, time
 ```
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## What is verified
 
@@ -671,7 +690,7 @@ reported as not identifiable from these data, and parameters that trade off
   name, declared BioModels ID), which the final check uses to stop one model's ID being
   attached to another.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Configuration
 
@@ -704,7 +723,7 @@ The model can also be chosen in code: `ask(..., model="anthropic:claude-sonnet-5
 `dynalyst.orchestration.llm.use_model("openai:<model>", effort="medium")` for every role at
 once. The plan-version limit (`MAX_PLAN_VERSIONS` = 4) and parallelism are fixed in `config.py`.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Open and self-hosted models
 
@@ -765,7 +784,7 @@ Things to check before a long run:
   record. Models of ~100B parameters and up behave much closer to the hosted reference models.
 - **Free hosted endpoints** have rate limits; run one request at a time.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Knowledge base (RAG)
 
@@ -793,7 +812,7 @@ added before the next search (`data/chunks_uploaded_papers.jsonl`). Include both
 `--chunks` when rebuilding from scratch. `DYNALYST_AUTO_INDEX_MODELS=0` turns automatic
 model indexing off.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Project layout
 
@@ -857,7 +876,7 @@ not in this repository; they are in the Zenodo archive of the paper (see [Citing
 `models/` is separate from `data/sbml_models/` on purpose: `pitchfork.xml` and
 `transcritical.xml` exist in both with different models inside.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Tests
 
@@ -883,9 +902,12 @@ The tests show that the code does what it should with given tool calls and scrip
 replies. They do not show that a real language model makes good scientific decisions; that is
 measured by the experiments in the paper, with real models and recorded runs.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Known limitations
+
+> [!WARNING]
+> Language models can still draw a wrong conclusion from correct numbers. Check answers against the run record (`scripts/inspect_run.py`).
 
 - **Language-model reliability.** The agent now relies on the models' own judgement for
   routing, planning and reading results; code checks only the 9 exceptions. The final check
@@ -921,21 +943,24 @@ measured by the experiments in the paper, with real models and recorded runs.
 - **XPPAUT compatibility is partial:** event priorities and some declarations are not
   supported and are rejected rather than ignored.
 
----
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Citing
 
 Please cite the software (`CITATION.cff`; GitHub shows it under "Cite this repository")
-and the paper that describes it. The paper's runs were made with release v1.0.0, which is
-archived on Zenodo together with the paper's evaluation scripts, reference implementations
-and run records. This release, v1.0.1, differs from it in two defaults: a diagram given no
-range sweeps 10^-3 to 10^3 times the parameter's value on a log axis (v1.0.0: one decade
-either side, widened to three and five), and the limit cycles born at a Hopf point are
-continued in the same run (v1.0.0 asked first in a chat). It also fixes how conservation
-laws are written as total amounts. Numbers the tools compute (fold and Hopf points, steady
-states, periods) are the same.
+and the paper that describes it.
 
----
+> [!IMPORTANT]
+> The paper's runs were made with release v1.0.0, which is
+> archived on Zenodo together with the paper's evaluation scripts, reference implementations
+> and run records. This release, v1.0.1, differs from it in two defaults: a diagram given no
+> range sweeps 10^-3 to 10^3 times the parameter's value on a log axis (v1.0.0: one decade
+> either side, widened to three and five), and the limit cycles born at a Hopf point are
+> continued in the same run (v1.0.0 asked first in a chat). It also fixes how conservation
+> laws are written as total amounts. Numbers the tools compute (fold and Hopf points, steady
+> states, periods) are the same.
+
+<p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
 ## Credits and licenses
 
