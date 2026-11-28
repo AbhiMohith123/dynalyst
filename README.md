@@ -262,16 +262,34 @@ that are numerically right, and an answer whose numbers are real).
 The same, as a flowchart:
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Inter, Segoe UI, Helvetica, Arial, sans-serif", "fontSize": "15px", "lineColor": "#64748b"}}}%%
 flowchart TD
-    U([User question]) --> O[Orchestrator<br/><i>LLM: plans, delegates, answers</i>]
-    O --> T[3 team supervisors<br/><i>LLM</i>]
-    T --> S[12 sub-agents<br/><i>LLM</i>]
-    S --> X[46 tools<br/><i>plain Python: AUTO-07p, jaxkineticmodel, SSA, CRNT, ...</i>]
-    X --> R{Reviewer<br/><i>code: re-checks the result</i>}
-    R -->|result, warnings, or sent back with a correction| S
-    S -->|report| T -->|report| O
+    U([User question]) --> O["<b>Orchestrator</b><br/><i>language model: plans, delegates, answers</i>"]
+    O --> T["<b>3 team supervisors</b><br/><i>language model</i>"]
+    T --> S["<b>12 sub-agents</b><br/><i>language model</i>"]
+    S -->|tool call| X["<b>46 tools</b><br/><i>plain Python: AUTO-07p, jaxkineticmodel, SSA, CRNT, ...</i>"]
+    X --> R{"<b>Reviewer</b><br/><i>code: re-checks the result</i>"}
+    R -->|result, warning, or sent back with a correction| S
+    S -->|report| T
+    T -->|report| O
     O --> A([Answer, from tool results only])
-    C{{Code exceptions: file safety · permission · retry limit · budgets ·<br/>duplicates · asking the user · final check · reviewer}} -.-> X & A
+    C{{"<b>Code exceptions</b><br/>file safety · permission · retry limit · budgets<br/>duplicates · asking the user · final check · reviewer · the user's words"}} -.-> X
+    C -.-> A
+
+    classDef user fill:#ffffff,stroke:#94a3b8,stroke-width:2px,color:#0f172a
+    classDef orch fill:#4f46e5,stroke:#3730a3,stroke-width:2px,color:#ffffff
+    classDef llm fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b
+    classDef code fill:#1e293b,stroke:#0f172a,stroke-width:2px,color:#f1f5f9
+    classDef review fill:#fffbeb,stroke:#f59e0b,stroke-width:2px,color:#78350f
+    classDef answer fill:#ecfdf5,stroke:#10b981,stroke-width:2px,color:#065f46
+    classDef rules fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,stroke-dasharray:6 4,color:#0f172a
+    class U user
+    class O orch
+    class T,S llm
+    class X code
+    class R review
+    class A answer
+    class C rules
 ```
 
 1. The **orchestrator** reads the question, passes each part to a team in the user's own
