@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model>
+    <listOfCompartments>
+      <compartment id="compartment" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="AP" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AK" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APK" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APPC" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APC" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APP" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="KTOT" value="500" constant="true"/>
+      <parameter id="PTOT" value="107.5" constant="true"/>
+      <parameter id="k2" value="0.01" constant="true"/>
+      <parameter id="k3" value="0.032" constant="true"/>
+      <parameter id="k33" value="1" constant="true"/>
+      <parameter id="k6" value="0.01" constant="true"/>
+      <parameter id="k7" value="1" constant="true"/>
+      <parameter id="k77" value="0.01" constant="true"/>
+      <parameter id="k4" value="15" constant="true"/>
+      <parameter id="k5" value="0.05" constant="true"/>
+      <parameter id="k55" value="1" constant="true"/>
+      <parameter id="ATOT" value="1" constant="true"/>
+      <parameter id="k1" value="0.02" constant="true"/>
+      <parameter id="k11" value="1" constant="true"/>
+      <parameter id="k8" value="0.15" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="dAP_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="AP" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AK"/>
+          <modifierSpeciesReference species="APK"/>
+          <modifierSpeciesReference species="APPC"/>
+          <modifierSpeciesReference species="APC"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <ci> AK </ci>
+                <ci> k2 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APC </ci>
+                <ci> k77 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APK </ci>
+                <ci> k33 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APPC </ci>
+                <ci> k6 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AK </ci>
+                <ci> AP </ci>
+                <ci> k3 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AP </ci>
+                <ci> APC </ci>
+                <ci> k7 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AP </ci>
+                <ci> APK </ci>
+                <ci> k3 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AP </ci>
+                <ci> APPC </ci>
+                <ci> k7 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AP </ci>
+                <ci> KTOT </ci>
+                <ci> k3 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AP </ci>
+                <ci> PTOT </ci>
+                <ci> k7 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAPP_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="APP" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="APK"/>
+          <modifierSpeciesReference species="APPC"/>
+          <modifierSpeciesReference species="APC"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <ci> APK </ci>
+                <ci> k4 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APPC </ci>
+                <ci> k55 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APC </ci>
+                <ci> APP </ci>
+                <ci> k5 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APP </ci>
+                <ci> APPC </ci>
+                <ci> k5 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APP </ci>
+                <ci> PTOT </ci>
+                <ci> k5 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAK_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="AK" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AP"/>
+          <modifierSpeciesReference species="APP"/>
+          <modifierSpeciesReference species="APK"/>
+          <modifierSpeciesReference species="APPC"/>
+          <modifierSpeciesReference species="APC"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <ci> k1 </ci>
+                <apply>
+                  <power/>
+                  <ci> AK </ci>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <ci> k1 </ci>
+                <apply>
+                  <power/>
+                  <ci> APK </ci>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AK </ci>
+                <ci> k11 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AK </ci>
+                <ci> k2 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AK </ci>
+                <ci> AP </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AK </ci>
+                <ci> APC </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AK </ci>
+                <ci> APP </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AK </ci>
+                <ci> APPC </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AP </ci>
+                <ci> APK </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APC </ci>
+                <ci> APK </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APK </ci>
+                <ci> APP </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APK </ci>
+                <ci> APPC </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> ATOT </ci>
+                <ci> KTOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AK </ci>
+                <ci> ATOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AK </ci>
+                <ci> KTOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AP </ci>
+                <ci> KTOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APC </ci>
+                <ci> KTOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APK </ci>
+                <ci> ATOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APK </ci>
+                <ci> KTOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APP </ci>
+                <ci> KTOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APPC </ci>
+                <ci> KTOT </ci>
+                <ci> k1 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> 2 </cn>
+                <ci> AK </ci>
+                <ci> APK </ci>
+                <ci> k1 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAPK_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="APK" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AP"/>
+          <modifierSpeciesReference species="AK"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APK </ci>
+                <ci> k33 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APK </ci>
+                <ci> k4 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AP </ci>
+                <ci> KTOT </ci>
+                <ci> k3 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AK </ci>
+                <ci> AP </ci>
+                <ci> k3 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AP </ci>
+                <ci> APK </ci>
+                <ci> k3 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAPPC_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="APPC" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="APP"/>
+          <modifierSpeciesReference species="APC"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APPC </ci>
+                <ci> k55 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APPC </ci>
+                <ci> k6 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> APP </ci>
+                <ci> PTOT </ci>
+                <ci> k5 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APC </ci>
+                <ci> APP </ci>
+                <ci> k5 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APP </ci>
+                <ci> APPC </ci>
+                <ci> k5 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAPC_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="APC" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AP"/>
+          <modifierSpeciesReference species="APPC"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APC </ci>
+                <ci> k77 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APC </ci>
+                <ci> k8 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> AP </ci>
+                <ci> PTOT </ci>
+                <ci> k7 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AP </ci>
+                <ci> APC </ci>
+                <ci> k7 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AP </ci>
+                <ci> APPC </ci>
+                <ci> k7 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

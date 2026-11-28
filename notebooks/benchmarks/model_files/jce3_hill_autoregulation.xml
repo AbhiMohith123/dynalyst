@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" version="1">
+  <model id="jce3_hill_autoregulation" name="jce3_hill_autoregulation">
+    <notes><body xmlns="http://www.w3.org/1999/xhtml"><p>J Chem Educ 2026 Example 3: Hill positive autoregulation. dP/dt = k1 P^n/(K^n+P^n) - k2 P, n = 2.</p></body></notes>
+    <listOfCompartments><compartment id="c" spatialDimensions="3" size="1" constant="true"/></listOfCompartments>
+    <listOfSpecies>
+      <species id="P" compartment="c" initialConcentration="0.5" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="k1" value="3.0" constant="true"/>
+      <parameter id="k2" value="1.0" constant="true"/>
+      <parameter id="K" value="1.0" constant="true"/>
+      <parameter id="n" value="2.0" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="R1_cooperative_production" reversible="false" fast="false">
+        <listOfProducts><speciesReference species="P" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><ci> k1 </ci><apply><power/><ci> P </ci><ci> n </ci></apply></apply><apply><plus/><apply><power/><ci> K </ci><ci> n </ci></apply><apply><power/><ci> P </ci><ci> n </ci></apply></apply></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R2_loss" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="P" stoichiometry="1" constant="true"/></listOfReactants>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k2 </ci><ci> P </ci></apply></math></kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

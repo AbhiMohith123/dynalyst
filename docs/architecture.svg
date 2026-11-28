@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1010" width="1600" height="1010" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1010" fill="#ffffff"/>
+  <text x="800" y="44" text-anchor="middle" font-size="30" font-weight="700" fill="#0f172a">dynalyst: how a question is answered</text>
+  <text x="800" y="74" text-anchor="middle" font-size="17" fill="#64748b">blue = language model decides · grey = plain code, no language model</text>
+
+  <!-- user and answer -->
+  <rect x="80" y="110" width="250" height="70" rx="35" fill="#f1f5f9" stroke="#334155" stroke-width="2"/>
+  <text x="205" y="152" text-anchor="middle" font-size="21" font-weight="600" fill="#0f172a">User question</text>
+  <rect x="1270" y="110" width="250" height="70" rx="35" fill="#f1f5f9" stroke="#334155" stroke-width="2"/>
+  <text x="1395" y="142" text-anchor="middle" font-size="21" font-weight="600" fill="#0f172a">Answer</text>
+  <text x="1395" y="165" text-anchor="middle" font-size="15" fill="#475569">from tool results only</text>
+
+  <!-- orchestrator -->
+  <rect x="440" y="100" width="720" height="110" rx="14" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.5"/>
+  <text x="800" y="138" text-anchor="middle" font-size="25" font-weight="700" fill="#1e3a8a">Orchestrator</text>
+  <text x="800" y="166" text-anchor="middle" font-size="16" fill="#1e3a8a">writes a plan for every question · gives each part to a team, in the user's words</text>
+  <text x="800" y="190" text-anchor="middle" font-size="16" fill="#1e3a8a">tools: the 3 teams, write_plan, read-only lookups · runs no analysis · answers from the results</text>
+  <line x1="330" y1="145" x2="436" y2="145" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+  <line x1="1160" y1="145" x2="1266" y2="145" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- arrows to teams -->
+  <line x1="640" y1="210" x2="300" y2="292" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+  <line x1="800" y1="210" x2="800" y2="292" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+  <line x1="960" y1="210" x2="1300" y2="292" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="788" y="262" text-anchor="end" font-size="15" fill="#475569" font-style="italic">task: the user's words + the model</text>
+
+  <!-- team columns -->
+  <g>
+    <rect x="80" y="296" width="440" height="66" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="300" y="325" text-anchor="middle" font-size="21" font-weight="700" fill="#1e3a8a">Model team</text>
+    <text x="300" y="349" text-anchor="middle" font-size="14" fill="#1e3a8a">supervisor: splits the task · sees only the task</text>
+    <rect x="80" y="376" width="440" height="270" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="104" y="410" font-size="17" fill="#0f172a"><tspan font-weight="600">model_search</tspan>  · 15 tools</text>
+    <text x="104" y="438" font-size="14" fill="#475569">BioModels, UniProt, ODEs, typed ODEs / XPP → model</text>
+    <text x="104" y="474" font-size="17" fill="#0f172a"><tspan font-weight="600">annotations</tspan>  · 1 tool</text>
+    <text x="104" y="510" font-size="17" fill="#0f172a"><tspan font-weight="600">model_classifier</tspan>  · 1 tool</text>
+    <text x="104" y="546" font-size="17" fill="#0f172a"><tspan font-weight="600">model_reduction</tspan>  · 1 tool  <tspan font-size="14" fill="#475569">(QSSA)</tspan></text>
+    <text x="104" y="582" font-size="17" fill="#0f172a"><tspan font-weight="600">network_theory</tspan>  · 2 tools  <tspan font-size="14" fill="#475569">(CRNT)</tspan></text>
+    <text x="104" y="626" font-size="14" fill="#1d4ed8" font-style="italic">sub-agents: pick tools, read results · see only their task</text>
+  </g>
+  <g>
+    <rect x="580" y="296" width="440" height="66" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="800" y="325" text-anchor="middle" font-size="21" font-weight="700" fill="#1e3a8a">Dynamics team</text>
+    <text x="800" y="349" text-anchor="middle" font-size="14" fill="#1e3a8a">supervisor: splits the task · sees only the task</text>
+    <rect x="580" y="376" width="440" height="270" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="604" y="410" font-size="17" fill="#0f172a"><tspan font-weight="600">steady_state</tspan>  · 2 tools  <tspan font-size="14" fill="#475569">(+ Jacobian network)</tspan></text>
+    <text x="604" y="446" font-size="17" fill="#0f172a"><tspan font-weight="600">simulation</tspan>  · 6 tools  <tspan font-size="14" fill="#475569">(time courses, phase planes)</tspan></text>
+    <text x="604" y="482" font-size="17" fill="#0f172a"><tspan font-weight="600">stochastic</tspan>  · 3 tools  <tspan font-size="14" fill="#475569">(SSA, CLE, switching)</tspan></text>
+    <text x="604" y="518" font-size="17" fill="#0f172a"><tspan font-weight="600">bifurcation</tspan>  · 7 tools  <tspan font-size="14" fill="#475569">(AUTO-07p, LHS scans)</tspan></text>
+    <text x="604" y="554" font-size="17" fill="#0f172a"><tspan font-weight="600">plotting</tspan>  · 1 tool  <tspan font-size="14" fill="#475569">(also plots earlier results)</tspan></text>
+    <text x="604" y="626" font-size="14" fill="#1d4ed8" font-style="italic">sub-agents: pick tools, read results · see only their task</text>
+  </g>
+  <g>
+    <rect x="1080" y="296" width="440" height="66" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="1300" y="325" text-anchor="middle" font-size="21" font-weight="700" fill="#1e3a8a">Data team</text>
+    <text x="1300" y="349" text-anchor="middle" font-size="14" fill="#1e3a8a">supervisor: splits the task · sees only the task</text>
+    <rect x="1080" y="376" width="440" height="270" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="1104" y="410" font-size="17" fill="#0f172a"><tspan font-weight="600">research</tspan>  · 11 tools</text>
+    <text x="1104" y="438" font-size="14" fill="#475569">literature, open-access papers, PDFs, knowledge base, OmniPath</text>
+    <text x="1104" y="474" font-size="17" fill="#0f172a"><tspan font-weight="600">parameter_estimation</tspan>  · 1 tool</text>
+    <text x="1104" y="502" font-size="14" fill="#475569">fit parameters to a data file</text>
+    <text x="1104" y="626" font-size="14" fill="#1d4ed8" font-style="italic">sub-agents: pick tools, read results · see only their task</text>
+  </g>
+
+  <!-- to tools and back -->
+  <line x1="740" y1="646" x2="740" y2="716" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="726" y="690" text-anchor="end" font-size="15" fill="#475569" font-style="italic">tool call</text>
+  <line x1="860" y1="716" x2="860" y2="650" stroke="#475569" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="874" y="682" font-size="15" fill="#475569" font-style="italic">result or error, re-checked by the reviewer (code)</text>
+  <text x="874" y="702" font-size="15" fill="#475569" font-style="italic">→ accepted, warned, or sent back with a correction</text>
+
+  <rect x="80" y="720" width="1440" height="84" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  <text x="800" y="754" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">46 tools (+ 4 read-only context tools) · plain Python, no language model inside</text>
+  <text x="800" y="783" text-anchor="middle" font-size="16" fill="#334155">AUTO-07p · jaxkineticmodel · Gillespie SSA / CLE · crnt4sbml · BioModels · PubMed · UniProt · OmniPath</text>
+
+  <!-- code exceptions -->
+  <rect x="80" y="836" width="1440" height="140" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="800" y="868" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Code exceptions: a fixed list of 9 (the only places code overrides a model)</text>
+  <g font-size="15" fill="#0f172a" text-anchor="middle">
+    <rect x="110.0" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="183.1" y="916" font-weight="600">1 File safety</text><text x="183.1" y="938" font-size="12" fill="#475569">no replace / delete</text>
+    <rect x="264.2" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="337.3" y="916" font-weight="600">2 Permission</text><text x="337.3" y="938" font-size="12" fill="#475569">own tools, valid args</text>
+    <rect x="418.4" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="491.6" y="916" font-weight="600">3 Retry limit</text><text x="491.6" y="938" font-size="12" fill="#475569">≤ 2 retries per tool</text>
+    <rect x="572.7" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="645.8" y="916" font-weight="600">4 Budgets</text><text x="645.8" y="938" font-size="12" fill="#475569">calls, plan versions</text>
+    <rect x="726.9" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="800.0" y="916" font-weight="600">5 Duplicates</text><text x="800.0" y="938" font-size="12" fill="#475569">same call reused</text>
+    <rect x="881.1" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="954.2" y="916" font-weight="600">6 Asking you</text><text x="954.2" y="938" font-size="12" fill="#475569">AUTO parameter, long CRNT</text>
+    <rect x="1035.3" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="1108.4" y="916" font-weight="600">7 Final check</text><text x="1108.4" y="938" font-size="12" fill="#475569">numbers, conclusions</text>
+    <rect x="1189.6" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="1262.7" y="916" font-weight="600">8 Reviewer</text><text x="1262.7" y="938" font-size="12" fill="#475569">re-checks every result</text>
+    <rect x="1343.8" y="888" width="146.2" height="66" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="1416.9" y="916" font-weight="600">9 Your words</text><text x="1416.9" y="938" font-size="12" fill="#475569">parameter, Ω, t_end</text>
+  </g>
+</svg>

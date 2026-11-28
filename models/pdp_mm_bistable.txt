@@ -1,0 +1,99 @@
+######### Model that gives rise to bistability #####
+
+### For MM kinetics
+
+##### For bistability from Markevich's paper
+
+#par ATOT=0.1 ### For bifurcation diagram
+
+#par KTOT=500
+#par PTOT=107.5
+
+#par km1=50.5
+#par km3=500
+#par km5=20.2
+#par km7=0.160
+#par k2=0.01
+#par k4=15
+#par k6=0.01
+#par k8=0.15
+
+
+##########  For PF ##################
+
+#par ATOT=0.1
+#par KTOT=100
+#par PTOT=100
+
+#par km1=50.5
+#par km3=500
+#par km5=50.5
+#par km7=500
+#par k2=0.01
+#par k4=0.2
+#par k6=0.01
+#par k8=0.2
+
+########### For bistability + TC #################
+
+par ATOT=0.1
+par KTOT=100
+par PTOT=100
+
+par km1=50.5
+par km3=500
+
+#par km5=0.001
+
+par km5=5.1
+par km7=500
+par k2=0.01
+par k4=0.2
+par k6=0.01
+par k8=0.2
+
+
+ 
+########### Conservation relationship ##############################
+
+AP = ATOT-(A + APP)
+
+#################### rates #########################################
+
+
+## R1: A + K <---k1/k11--> AK
+## R2: AK ---k2---> AP + K
+## R3: AP + K <---k3/k33--> APK
+## R4: APK --k4---> APP + K
+## R5: APP + P <---k5/k55---> APPC
+## R6: APPC --- k6----> AP + P
+## R7: AP <---- k7/k77---> APC 
+## R8: APC ---k8 ---> A + P
+
+
+r1 = (k2*KTOT*A/km1)/(1 + A/km1 + (ATOT-A-APP)/km3)
+r2 = (k4*KTOT*(ATOT-A-APP)/km3)/(1+ A/km1 + (ATOT-A-APP)/km3)
+
+r3 = (k8*PTOT*(ATOT-A-APP)/km7)/(1+  (ATOT-A-APP)/km7+ APP/km5)
+r4 = (k6*PTOT*APP/km5)/(1+ (ATOT-A-APP)/km7+ APP/km5)
+
+############# ODE ###########################
+
+  A'=r3-r1
+APP'=r2-r4
+ 
+####################################################
+
+
+#AUTO settings
+@ meth=Stiff,dtmax=0.05,dt=0.01,total=1500,maxstor=100000, bounds=1000000
+@ dsmax=1e-1, dsmin=1e-3, ds=1e-1, ntst=40, nmax=10000, npr=30,
+@ parmin=-0.01, parmax=200, autovar=APP
+@ autoxmin=0,autoxmax=200,autoymin=0, autoymax=100 
+@ nplot=2,xp=t,yp1=A,yp2=APP,xlo=0,ylo=0,xhigh=1500,yhigh=2
+#@ nplot=2,xp=APP,yp1=A,xlo=0,ylo=0,xhigh=100,yhigh=100
+
+ 
+
+
+done

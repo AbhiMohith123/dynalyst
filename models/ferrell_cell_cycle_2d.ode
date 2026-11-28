@@ -1,0 +1,11 @@
+# Ferrell, Tsai & Yang (2011) Cell 144:874 -- two-variable CDK1/APC model.
+# CDK1 is made at a1 and destroyed via active APC; CDK1 activates APC
+# (fraction 0..1). Two-variable negative feedback: damped oscillations
+# into a stable spiral (no limit cycle).
+# CHECK the form and values against the paper's Figure 3 before reporting.
+par a1=0.1, b1=3, a2=3, b2=1, K=0.5, n=8
+CDK1'=a1 - b1*CDK1*APC^n/(K^n + APC^n)
+APC'=a2*(1-APC)*CDK1^n/(K^n + CDK1^n) - b2*APC
+init CDK1=0, APC=0
+@ total=50
+done

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model>
+    <listOfCompartments>
+      <compartment id="compartment" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="NRF2" compartment="compartment" initialAmount="3.187e-05" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AMPK" compartment="compartment" initialAmount="0.087" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mTOR" compartment="compartment" initialAmount="0.482" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mRNA" compartment="compartment" initialAmount="0.074" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AUTA" compartment="compartment" initialAmount="0.012" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="DEATH" compartment="compartment" initialAmount="6.991e-06" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="Nrf2T" value="1" constant="true"/>
+      <parameter id="jnrf" value="0.001" constant="true"/>
+      <parameter id="kanrf_pp" value="2" constant="true"/>
+      <parameter id="kinrf_p" value="15" constant="true"/>
+      <parameter id="kamr_p" value="1" constant="true"/>
+      <parameter id="kimr_p" value="20" constant="true"/>
+      <parameter id="mRNAT" value="1" constant="true"/>
+      <parameter id="stress" value="0" constant="true"/>
+      <parameter id="AMPKT" value="1" constant="true"/>
+      <parameter id="Jampk" value="0.2" constant="true"/>
+      <parameter id="kaak" value="7.5" constant="true"/>
+      <parameter id="kiak" value="1.5" constant="true"/>
+      <parameter id="kamtor_p" value="0.03" constant="true"/>
+      <parameter id="kimtor_p" value="0.5" constant="true"/>
+      <parameter id="kimtor_pp" value="10" constant="true"/>
+      <parameter id="mTORT" value="1" constant="true"/>
+      <parameter id="AUUT" value="1" constant="true"/>
+      <parameter id="Jau" value="0.2" constant="true"/>
+      <parameter id="kaau_p" value="0.001" constant="true"/>
+      <parameter id="kaau_pp" value="3" constant="true"/>
+      <parameter id="kiau_p" value="10" constant="true"/>
+      <parameter id="kiau_pp" value="20" constant="true"/>
+      <parameter id="Jdea" value="0.1" constant="true"/>
+      <parameter id="kade_p" value="0.5" constant="true"/>
+      <parameter id="kade_pp" value="0.05" constant="true"/>
+      <parameter id="kide_p" value="30" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="dNRF2_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="NRF2" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AMPK"/>
+          <modifierSpeciesReference species="mTOR"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> Nrf2T </ci>
+                    <ci> jnrf </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> NRF2 </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> Nrf2T </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> NRF2 </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kanrf_pp </ci>
+                  <apply>
+                    <times/>
+                    <ci> AMPK </ci>
+                    <ci> kanrf_pp </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> NRF2 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> NRF2 </ci>
+                    <ci> jnrf </ci>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kinrf_p </ci>
+                  <apply>
+                    <times/>
+                    <ci> kinrf_p </ci>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dmRNA_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="mRNA" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NRF2"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <ci> kamr_p </ci>
+                  <apply>
+                    <times/>
+                    <ci> kamr_p </ci>
+                    <ci> stress </ci>
+                    <apply>
+                      <power/>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <ci> stress </ci>
+                      </apply>
+                      <cn type="integer"> -1 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> mRNAT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> mRNA </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> mRNA </ci>
+                <apply>
+                  <plus/>
+                  <ci> kimr_p </ci>
+                  <apply>
+                    <times/>
+                    <ci> NRF2 </ci>
+                    <ci> kimr_p </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAMPK_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="AMPK" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="mRNA"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AMPK </ci>
+                <ci> kiak </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AMPK </ci>
+                    <ci> Jampk </ci>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <ci> kaak </ci>
+                <ci> mRNA </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AMPKT </ci>
+                    <ci> Jampk </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> AMPK </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> AMPKT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> AMPK </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dmTOR_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="mTOR" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NRF2"/>
+          <modifierSpeciesReference species="AMPK"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <ci> kamtor_p </ci>
+                  <apply>
+                    <times/>
+                    <ci> kamtor_p </ci>
+                    <ci> stress </ci>
+                    <apply>
+                      <power/>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <ci> stress </ci>
+                      </apply>
+                      <cn type="integer"> -1 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> mTORT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> mTOR </ci>
+                <apply>
+                  <plus/>
+                  <ci> kimtor_p </ci>
+                  <apply>
+                    <times/>
+                    <ci> AMPK </ci>
+                    <ci> kimtor_p </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> NRF2 </ci>
+                    <ci> kimtor_pp </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAUTA_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="AUTA" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NRF2"/>
+          <modifierSpeciesReference species="AMPK"/>
+          <modifierSpeciesReference species="mTOR"/>
+          <modifierSpeciesReference species="DEATH"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AUUT </ci>
+                    <ci> Jau </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> AUTA </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> AUUT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> AUTA </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kaau_p </ci>
+                  <apply>
+                    <times/>
+                    <ci> AMPK </ci>
+                    <ci> kaau_pp </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> NRF2 </ci>
+                    <ci> kaau_p </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AUTA </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AUTA </ci>
+                    <ci> Jau </ci>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kiau_p </ci>
+                  <apply>
+                    <times/>
+                    <ci> DEATH </ci>
+                    <ci> kiau_pp </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> kiau_p </ci>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dDEATH_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="DEATH" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NRF2"/>
+          <modifierSpeciesReference species="AUTA"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <cn type="integer"> 1 </cn>
+                    <ci> Jdea </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> DEATH </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <cn type="integer"> 1 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> DEATH </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <apply>
+                    <times/>
+                    <ci> NRF2 </ci>
+                    <ci> kade_p </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> kade_pp </ci>
+                    <ci> stress </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> DEATH </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> DEATH </ci>
+                    <ci> Jdea </ci>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kide_p </ci>
+                  <apply>
+                    <times/>
+                    <ci> AUTA </ci>
+                    <ci> kide_p </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

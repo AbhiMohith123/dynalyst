@@ -1,0 +1,10 @@
+# Ferrell, Tsai & Yang (2011) Cell 144:874 -- one-variable CDK1/APC model.
+# APC is assumed to follow CDK1 instantly (Hill function of CDK1), so
+# APC activity = CDK1^n/(K^n + CDK1^n). One ODE: no oscillation possible;
+# CDK1 settles to a stable steady state.
+# CHECK the form and values against the paper's Figure 2 before reporting.
+par a1=0.1, b1=3, K=0.5, n=8
+CDK1'=a1 - b1*CDK1*CDK1^n/(K^n + CDK1^n)
+init CDK1=0
+@ total=25
+done

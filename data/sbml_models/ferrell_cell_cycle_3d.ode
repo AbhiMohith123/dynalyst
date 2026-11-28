@@ -1,0 +1,12 @@
+# Ferrell, Tsai & Yang (2011) Cell 144:874 -- three-variable CDK1/Plk1/APC
+# model (Xenopus embryonic cell cycle). Negative feedback through an
+# intermediate (Plk1) gives sustained limit-cycle oscillations.
+# Same equations and values as the Morpheus built-in model M0001.
+# Plk1 and APC are active fractions (0..1).
+par a1=0.1, a2=3, a3=3, b1=3, b2=1, b3=1, K=0.5, n=8
+CDK1'=a1 - b1*CDK1*APC^n/(K^n + APC^n)
+Plk1'=a2*(1-Plk1)*CDK1^n/(K^n + CDK1^n) - b2*Plk1
+APC'=a3*(1-APC)*Plk1^n/(K^n + Plk1^n) - b3*APC
+init CDK1=0, Plk1=0, APC=0
+@ total=25
+done

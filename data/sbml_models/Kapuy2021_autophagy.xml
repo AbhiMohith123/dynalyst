@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model>
+    <listOfCompartments>
+      <compartment id="compartment" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="AUCO" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AUIN" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mTOR" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pAUIN" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="DEATH" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AUEX" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="AUCOT" value="1" constant="true"/>
+      <parameter id="JAUCO" value="0.001" constant="true"/>
+      <parameter id="kaac" value="0.05" constant="true"/>
+      <parameter id="kaac_p" value="2" constant="true"/>
+      <parameter id="kiac" value="0.01" constant="true"/>
+      <parameter id="kiac_p" value="15" constant="true"/>
+      <parameter id="kapai" value="0.02" constant="true"/>
+      <parameter id="kapai_p" value="1" constant="true"/>
+      <parameter id="kipai" value="0.25" constant="true"/>
+      <parameter id="kipai_p" value="20" constant="true"/>
+      <parameter id="kipai_pp" value="0" constant="true"/>
+      <parameter id="kipai_tp" value="2" constant="true"/>
+      <parameter id="pAUINT" value="1" constant="true"/>
+      <parameter id="stress" value="0" constant="true"/>
+      <parameter id="AUINT" value="1" constant="true"/>
+      <parameter id="JAUIN" value="0.2" constant="true"/>
+      <parameter id="kaai" value="7.5" constant="true"/>
+      <parameter id="kiai" value="1.5" constant="true"/>
+      <parameter id="kiai_p" value="2" constant="true"/>
+      <parameter id="kamtor" value="0.05" constant="true"/>
+      <parameter id="kamtor_p" value="0.03" constant="true"/>
+      <parameter id="kamtor_pp" value="0.3" constant="true"/>
+      <parameter id="kimtor" value="0.01" constant="true"/>
+      <parameter id="kimtor_p" value="0.5" constant="true"/>
+      <parameter id="kimtor_pp" value="10" constant="true"/>
+      <parameter id="mtoT" value="1" constant="true"/>
+      <parameter id="AUEXT" value="1" constant="true"/>
+      <parameter id="JAUEX" value="0.2" constant="true"/>
+      <parameter id="kaax" value="0.075" constant="true"/>
+      <parameter id="kaax_p" value="0.15" constant="true"/>
+      <parameter id="kaax_pp" value="2" constant="true"/>
+      <parameter id="kiax" value="0.1" constant="true"/>
+      <parameter id="kiax_p" value="20" constant="true"/>
+      <parameter id="kiax_pp" value="20" constant="true"/>
+      <parameter id="Jdea" value="0.1" constant="true"/>
+      <parameter id="kade" value="0" constant="true"/>
+      <parameter id="kade_p" value="0.5" constant="true"/>
+      <parameter id="kade_pp" value="0.05" constant="true"/>
+      <parameter id="kade_tp" value="0.005" constant="true"/>
+      <parameter id="kide" value="0.01" constant="true"/>
+      <parameter id="kide_p" value="30" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="dAUCO_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="AUCO" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AUIN"/>
+          <modifierSpeciesReference species="mTOR"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AUCOT </ci>
+                    <ci> JAUCO </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> AUCO </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> AUCOT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> AUCO </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kaac </ci>
+                  <apply>
+                    <times/>
+                    <ci> AUIN </ci>
+                    <ci> kaac_p </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AUCO </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AUCO </ci>
+                    <ci> JAUCO </ci>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kiac </ci>
+                  <apply>
+                    <times/>
+                    <ci> kiac_p </ci>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dpAUIN_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="pAUIN" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AUCO"/>
+          <modifierSpeciesReference species="mTOR"/>
+          <modifierSpeciesReference species="DEATH"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <ci> kapai </ci>
+                  <apply>
+                    <times/>
+                    <ci> kapai_p </ci>
+                    <ci> stress </ci>
+                    <apply>
+                      <power/>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <ci> stress </ci>
+                      </apply>
+                      <cn type="integer"> -1 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> pAUINT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> pAUIN </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> pAUIN </ci>
+                <apply>
+                  <plus/>
+                  <ci> kipai </ci>
+                  <apply>
+                    <times/>
+                    <ci> AUCO </ci>
+                    <ci> kipai_p </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> DEATH </ci>
+                    <ci> kipai_tp </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> kipai_pp </ci>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAUIN_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="AUIN" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="pAUIN"/>
+          <modifierSpeciesReference species="mTOR"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AUIN </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AUIN </ci>
+                    <ci> JAUIN </ci>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kiai </ci>
+                  <apply>
+                    <times/>
+                    <ci> kiai_p </ci>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <ci> kaai </ci>
+                <ci> pAUIN </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AUINT </ci>
+                    <ci> JAUIN </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> AUIN </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> AUINT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> AUIN </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dmTOR_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="mTOR" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AUCO"/>
+          <modifierSpeciesReference species="AUIN"/>
+          <modifierSpeciesReference species="DEATH"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <plus/>
+                  <ci> mtoT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kamtor </ci>
+                  <apply>
+                    <times/>
+                    <ci> DEATH </ci>
+                    <ci> kamtor_pp </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> kamtor_p </ci>
+                    <ci> stress </ci>
+                    <apply>
+                      <power/>
+                      <apply>
+                        <plus/>
+                        <cn type="integer"> 1 </cn>
+                        <ci> stress </ci>
+                      </apply>
+                      <cn type="integer"> -1 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> mTOR </ci>
+                <apply>
+                  <plus/>
+                  <ci> kimtor </ci>
+                  <apply>
+                    <times/>
+                    <ci> AUCO </ci>
+                    <ci> kimtor_pp </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> AUIN </ci>
+                    <ci> kimtor_p </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAUEX_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="AUEX" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AUCO"/>
+          <modifierSpeciesReference species="AUIN"/>
+          <modifierSpeciesReference species="mTOR"/>
+          <modifierSpeciesReference species="DEATH"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AUEXT </ci>
+                    <ci> JAUEX </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> AUEX </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> AUEXT </ci>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> AUEX </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kaax </ci>
+                  <apply>
+                    <times/>
+                    <ci> AUCO </ci>
+                    <ci> kaax_p </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> AUIN </ci>
+                    <ci> kaax_pp </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> AUEX </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> AUEX </ci>
+                    <ci> JAUEX </ci>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kiax </ci>
+                  <apply>
+                    <times/>
+                    <ci> DEATH </ci>
+                    <ci> kiax_pp </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> kiax_p </ci>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dDEATH_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="DEATH" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="AUCO"/>
+          <modifierSpeciesReference species="mTOR"/>
+          <modifierSpeciesReference species="AUEX"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <cn type="integer"> 1 </cn>
+                    <ci> Jdea </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> DEATH </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <cn type="integer"> 1 </cn>
+                  <apply>
+                    <times/>
+                    <cn type="integer"> -1 </cn>
+                    <ci> DEATH </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kade </ci>
+                  <apply>
+                    <times/>
+                    <ci> AUCO </ci>
+                    <ci> kade_p </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> kade_pp </ci>
+                    <ci> stress </ci>
+                  </apply>
+                  <apply>
+                    <times/>
+                    <ci> kade_tp </ci>
+                    <ci> mTOR </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> DEATH </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> DEATH </ci>
+                    <ci> Jdea </ci>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> kide </ci>
+                  <apply>
+                    <times/>
+                    <ci> AUEX </ci>
+                    <ci> kide_p </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

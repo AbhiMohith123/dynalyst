@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dynalyst"
+version = "1.0.1"
+description = "Dynalyst: an agentic AI framework for bifurcation and dynamical analysis of biochemical ODE models (AUTO-07p continuation, steady states, stochastic simulation, reaction network theory)"
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Abhilasha Sharma"}, {name = "Mohith S Prasad"}, {name = "K. Sriram"}]
+# Core: read models, simulate, find steady states, continue with AUTO-07p, run the agent.
+# AUTO-07p itself is built from vendor/ by scripts/build_auto.py (needs gfortran).
+dependencies = [
+  "numpy", "scipy", "sympy", "python-libsbml", "pandas", "matplotlib", "openpyxl", "requests",
+  "langchain>=1.0", "langchain-core", "langchain-openai", "openai",
+]
+
+[project.optional-dependencies]
+# other chat-model providers (anthropic:..., ollama:..., google_genai:...)
+providers = ["langchain-anthropic", "anthropic", "langchain-ollama", "langchain-google-genai"]
+# jaxkineticmodel's importer and tools (the package itself: pip install -e vendor/jaxkineticmodel --no-deps)
+jkm = ["jax==0.4.35", "jaxlib==0.4.35", "diffrax", "equinox", "optax==0.2.3"]
+# knowledge base, PDF reading and reports
+rag = ["chromadb", "sentence-transformers", "rank-bm25", "pymupdf", "tqdm", "beautifulsoup4"]
+# notebook interface and interactive plots
+notebook = ["ipython", "ipywidgets", "jupyterlab", "plotly", "nbformat>=4.2"]
+test = ["pytest"]
+# everything used for the paper (reaction network theory: pip install --no-deps "crnt4sbml==0.0.15")
+all = ["dynalyst[providers,jkm,rag,notebook,test]"]
+
+[project.urls]
+Repository = "https://github.com/dynalyst26/dynalyst"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dynalyst*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["auto: needs a built AUTO-07p (python scripts/build_auto.py)"]

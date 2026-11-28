@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use Dynalyst, please cite the software and the paper that describes it."
+title: "Dynalyst: an agentic AI framework for bifurcation and dynamical analysis of biochemical ODE models"
+version: 1.0.1
+date-released: 2026-11-30
+license: MIT
+repository-code: "https://github.com/dynalyst26/dynalyst"
+authors:
+  - family-names: Sharma
+    given-names: Abhilasha
+    affiliation: "Indraprastha Institute of Information Technology Delhi"
+  - family-names: Prasad
+    given-names: Mohith S
+  - family-names: Sriram
+    given-names: K.
+    affiliation: "Indraprastha Institute of Information Technology Delhi"
+# After the Zenodo archive is made, add its DOI here:
+# identifiers:
+#   - type: doi
+#     value: 10.5281/zenodo.XXXXXXX
+keywords:
+  - bifurcation analysis
+  - AUTO-07p
+  - agentic AI
+  - systems biology
+  - SBML

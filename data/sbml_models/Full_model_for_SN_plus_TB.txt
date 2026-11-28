@@ -1,0 +1,74 @@
+######## Full model for SN + TB ################
+
+par ATOT=0.1
+par k4=0.2
+par k5=0.198
+par KTOT=100
+par PTOT=100
+
+par k1=0.02,k11=1
+par k2=0.01
+par k3=0.0024,k33=1
+
+par k55=1
+par k6=0.01
+par k7=0.0024,k77=1
+par k8=0.2
+
+
+########### Conservation relationship ##############################
+A = ATOT-(AP + APP + AK + APK + APPC + APC)
+K= KTOT-(AK + APK)
+P= PTOT-(APPC + APC)
+
+#################### rates #########################################
+
+
+## R1: A + K <---k1/k11--> AK
+## R2: AK ---k2---> AP + K
+## R3: AP + K <---k3/k33--> APK
+## R4: APK --k4---> APP + K
+## R5: APP + P <---k5/k55---> APPC
+## R6: APPC --- k6----> AP + P
+## R7: AP <---- k7/k77---> APC 
+## R8: APC ---k8 ---> A + P
+
+
+v1=k1*A*K-k11*AK
+v2=k2*AK
+v3=k3*AP*K-k33*APK
+v4=k4*APK 
+v5=k5*APP*P-k55*APPC
+v6=k6*APPC
+v7=k7*AP*P-k77*APC
+v8=k8*APC
+
+############# ODE ###########################
+
+AP'=v2-v3+v6-v7
+APP'=v4-v5
+AK'=v1-v2
+APK'=v3-v4
+APPC'=v5-v6
+APC'=v7-v8
+ 
+
+#A'=-v1+ v8
+#K'=-v1+v2-v3+v4
+#P'=-v5+v6-v7+v8
+####################### Auxillary variables #########
+#aux A1 = A
+#aux K1 = K
+#aux P1 = P 
+
+####################################################
+
+#AUTO settings
+@ meth=Stiff,dtmax=0.05,dt=0.5,total=2000,maxstor=100000, bounds=1000000
+@ dsmax=1e-1, dsmin=1e-2, ds=1e-1, ntst=30, nmax=10000, npr=20
+@ parmin=-0.01, parmax=500, autovar=APP
+@ autoxmin=0, autoxmax=500, autoymin=0,autoymax=15
+@ nplot=2,yp1=AP,yp2=APP,xp=T,xlo=0,ylo=0, xhigh=1500, yhigh=2
+
+
+done

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model>
+    <listOfCompartments>
+      <compartment id="compartment" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="A" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APP" compartment="compartment" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="ATOT" value="0.1" constant="true"/>
+      <parameter id="KTOT" value="100" constant="true"/>
+      <parameter id="PTOT" value="100" constant="true"/>
+      <parameter id="k2" value="0.01" constant="true"/>
+      <parameter id="k8" value="0.2" constant="true"/>
+      <parameter id="km1" value="50.5" constant="true"/>
+      <parameter id="km3" value="500" constant="true"/>
+      <parameter id="km5" value="5.1" constant="true"/>
+      <parameter id="km7" value="500" constant="true"/>
+      <parameter id="k4" value="0.2" constant="true"/>
+      <parameter id="k6" value="0.01" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="dA_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="A" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="APP"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <ci> ATOT </ci>
+                <ci> PTOT </ci>
+                <ci> k8 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> ATOT </ci>
+                    <ci> km7 </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> A </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> APP </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <ci> APP </ci>
+                      <ci> km7 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km5 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> A </ci>
+                <ci> KTOT </ci>
+                <ci> k2 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> A </ci>
+                    <ci> km1 </ci>
+                    <apply>
+                      <times/>
+                      <ci> ATOT </ci>
+                      <ci> km1 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km3 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> A </ci>
+                      <ci> km1 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km3 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> APP </ci>
+                      <ci> km1 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km3 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> A </ci>
+                <ci> PTOT </ci>
+                <ci> k8 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> ATOT </ci>
+                    <ci> km7 </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> A </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> APP </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <ci> APP </ci>
+                      <ci> km7 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km5 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APP </ci>
+                <ci> PTOT </ci>
+                <ci> k8 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> ATOT </ci>
+                    <ci> km7 </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> A </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> APP </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <ci> APP </ci>
+                      <ci> km7 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km5 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dAPP_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="APP" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="A"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply>
+                <times/>
+                <ci> ATOT </ci>
+                <ci> KTOT </ci>
+                <ci> k4 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> ATOT </ci>
+                    <ci> km3 </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> A </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> APP </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <ci> A </ci>
+                      <ci> km3 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km1 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> A </ci>
+                <ci> KTOT </ci>
+                <ci> k4 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> ATOT </ci>
+                    <ci> km3 </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> A </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> APP </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <ci> A </ci>
+                      <ci> km3 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km1 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APP </ci>
+                <ci> KTOT </ci>
+                <ci> k4 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> ATOT </ci>
+                    <ci> km3 </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> A </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> APP </ci>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <ci> A </ci>
+                      <ci> km3 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km1 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> APP </ci>
+                <ci> PTOT </ci>
+                <ci> k6 </ci>
+                <apply>
+                  <power/>
+                  <apply>
+                    <plus/>
+                    <ci> APP </ci>
+                    <ci> km5 </ci>
+                    <apply>
+                      <times/>
+                      <ci> ATOT </ci>
+                      <ci> km5 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km7 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> A </ci>
+                      <ci> km5 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km7 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> -1 </cn>
+                      <ci> APP </ci>
+                      <ci> km5 </ci>
+                      <apply>
+                        <power/>
+                        <ci> km7 </ci>
+                        <cn type="integer"> -1 </cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> -1 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

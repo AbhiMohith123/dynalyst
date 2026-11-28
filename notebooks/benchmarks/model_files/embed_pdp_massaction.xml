@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" version="1">
+  <model id="embed_pdp_massaction" name="embed_pdp_massaction">
+    <notes><body xmlns="http://www.w3.org/1999/xhtml"><p>EMBED (ACS Omega 2026) full mechanistic dual phosphorylation-dephosphorylation network, mass action. Elementary constants chosen by us to match Km and kcat of parameter set 2; see the kit README.</p></body></notes>
+    <listOfCompartments><compartment id="c" spatialDimensions="3" size="1" constant="true"/></listOfCompartments>
+    <listOfSpecies>
+      <species id="A" compartment="c" initialConcentration="140.0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AK" compartment="c" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AP" compartment="c" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APK" compartment="c" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APP" compartment="c" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APPC" compartment="c" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="APC" compartment="c" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="K" compartment="c" initialConcentration="100.0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="P" compartment="c" initialConcentration="100.0" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="k1" value="1.0" constant="true"/>
+      <parameter id="k11" value="50.49" constant="true"/>
+      <parameter id="k2" value="0.01" constant="true"/>
+      <parameter id="k3" value="1.0" constant="true"/>
+      <parameter id="k33" value="499.8" constant="true"/>
+      <parameter id="k4" value="0.2" constant="true"/>
+      <parameter id="k5" value="1.0" constant="true"/>
+      <parameter id="k55" value="50.49" constant="true"/>
+      <parameter id="k6" value="0.01" constant="true"/>
+      <parameter id="k7" value="1.0" constant="true"/>
+      <parameter id="k77" value="499.8" constant="true"/>
+      <parameter id="k8" value="0.2" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="R1f" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="A" stoichiometry="1" constant="true"/><speciesReference species="K" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="AK" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci> k1 </ci><ci> A </ci></apply><ci> K </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R1r" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="AK" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="A" stoichiometry="1" constant="true"/><speciesReference species="K" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k11 </ci><ci> AK </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R2" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="AK" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="AP" stoichiometry="1" constant="true"/><speciesReference species="K" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k2 </ci><ci> AK </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R3f" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="AP" stoichiometry="1" constant="true"/><speciesReference species="K" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="APK" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci> k3 </ci><ci> AP </ci></apply><ci> K </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R3r" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="APK" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="AP" stoichiometry="1" constant="true"/><speciesReference species="K" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k33 </ci><ci> APK </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R4" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="APK" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="APP" stoichiometry="1" constant="true"/><speciesReference species="K" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k4 </ci><ci> APK </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R5f" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="APP" stoichiometry="1" constant="true"/><speciesReference species="P" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="APPC" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci> k5 </ci><ci> APP </ci></apply><ci> P </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R5r" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="APPC" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="APP" stoichiometry="1" constant="true"/><speciesReference species="P" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k55 </ci><ci> APPC </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R6" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="APPC" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="AP" stoichiometry="1" constant="true"/><speciesReference species="P" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k6 </ci><ci> APPC </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R7f" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="AP" stoichiometry="1" constant="true"/><speciesReference species="P" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="APC" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci> k7 </ci><ci> AP </ci></apply><ci> P </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R7r" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="APC" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="AP" stoichiometry="1" constant="true"/><speciesReference species="P" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k77 </ci><ci> APC </ci></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="R8" reversible="false" fast="false">
+        <listOfReactants><speciesReference species="APC" stoichiometry="1" constant="true"/></listOfReactants>
+        <listOfProducts><speciesReference species="A" stoichiometry="1" constant="true"/><speciesReference species="P" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci> k8 </ci><ci> APC </ci></apply></math></kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model id="pitchfork_mutual_inhibition">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <p>dp1/dtau = alpha/(1+P2^4) - P1; dp2/dtau = alpha/(1+P1^4) - P2. Symmetric mutual (Hill n=4) inhibition (Sriram 2026, Example 4). Known supercritical pitchfork bifurcation at alpha_c=(4/3)^(5/4)~1.013: symmetric branch P1=P2 stable below alpha_c, unstable above, with two new asymmetric stable branches.</p>
+      </body>
+    </notes>
+    <listOfCompartments>
+      <compartment id="c" spatialDimensions="3" size="1" units="litre" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="P1" compartment="c" initialAmount="0.6" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="P2" compartment="c" initialAmount="0.4" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="alpha" value="1.5" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="R1_production_P1" reversible="false">
+        <listOfProducts>
+          <speciesReference species="P1" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="P2"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <ci> alpha </ci>
+              <apply>
+                <plus/>
+                <cn type="integer"> 1 </cn>
+                <apply>
+                  <power/>
+                  <ci> P2 </ci>
+                  <cn type="integer"> 4 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="R2_loss_P1" reversible="false">
+        <listOfReactants>
+          <speciesReference species="P1" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> P1 </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="R3_production_P2" reversible="false">
+        <listOfProducts>
+          <speciesReference species="P2" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="P1"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <ci> alpha </ci>
+              <apply>
+                <plus/>
+                <cn type="integer"> 1 </cn>
+                <apply>
+                  <power/>
+                  <ci> P1 </ci>
+                  <cn type="integer"> 4 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="R4_loss_P2" reversible="false">
+        <listOfReactants>
+          <speciesReference species="P2" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> P2 </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

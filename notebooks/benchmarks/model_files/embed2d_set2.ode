@@ -1,0 +1,24 @@
+# Reduced 2D dual phosphorylation-dephosphorylation model of Harika and Sriram (ACS Omega 2026, EMBED),
+# symmetric values (KTOT=PTOT, km1=km5, km3=km7, k2=k6, k4=k8), from the authors' XPPAUT file. A: unphosphorylated, APP: doubly phosphorylated,
+# AP = ATOT - A - APP (conservation of the substrate).
+par ATOT=0.1
+par KTOT=100
+par PTOT=100
+par km1=50.5
+par km3=500
+par km5=50.5
+par km7=500
+par k2=0.01
+par k4=0.2
+par k6=0.01
+par k8=0.2
+AP = ATOT-(A+APP)
+r1 = (k2*KTOT*A/km1)/(1 + A/km1 + AP/km3)
+r2 = (k4*KTOT*AP/km3)/(1 + A/km1 + AP/km3)
+r3 = (k8*PTOT*AP/km7)/(1 + AP/km7 + APP/km5)
+r4 = (k6*PTOT*APP/km5)/(1 + AP/km7 + APP/km5)
+A'=r3-r1
+APP'=r2-r4
+init A=0.05, APP=0.05
+@ meth=Stiff, total=1500
+done

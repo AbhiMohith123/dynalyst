@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.ipynb_checkpoints/
+.DS_Store
+.pytest_cache/
+# knowledge-graph output of the graphify tool (regenerated on demand)
+graphify-out/
+
+# run outputs (scan_memory.jsonl is kept: it is the LHS scan history)
+outputs/*
+!outputs/scan_memory.jsonl
+# model files the agent writes for equations typed in a request (named by content)
+data/sbml_models/typed_*.xml
+chroma_db/
+
+# AUTO-07p build products (rebuilt per machine by scripts/build_auto.sh)
+vendor/auto-07p/**/*.o
+vendor/auto-07p/**/*.mod
+vendor/auto-07p/**/*.dSYM/
+vendor/auto-07p/bin/*
+!vendor/auto-07p/bin/auto
+!vendor/auto-07p/bin/autox
+vendor/auto-07p/config.log
+vendor/auto-07p/config.status

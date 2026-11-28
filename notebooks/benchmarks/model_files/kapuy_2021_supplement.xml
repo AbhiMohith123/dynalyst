@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" version="1">
+  <model id="kapuy_2021_autophagy" name="kapuy_2021_autophagy">
+    <notes><body xmlns="http://www.w3.org/1999/xhtml"><p>Kapuy et al. 2021 (Cell Death Dis 12:309) autophagy model, six variables, stress as input; written from the equations and values of the paper supplement.</p></body></notes>
+    <listOfCompartments><compartment id="c" spatialDimensions="3" size="1" constant="true"/></listOfCompartments>
+    <listOfSpecies>
+      <species id="AUCO" compartment="c" initialConcentration="1.3382394555456894e-05" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AUIN" compartment="c" initialConcentration="0.0382182217962146" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="mTOR" compartment="c" initialConcentration="0.6369893385650321" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pAUIN" compartment="c" initialConcentration="0.07167791582669325" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="DEATH" compartment="c" initialConcentration="0.004379161116379156" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="AUEX" compartment="c" initialConcentration="0.0019710192482345823" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="AUCOT" value="1.0" constant="true"/>
+      <parameter id="JAUCO" value="0.001" constant="true"/>
+      <parameter id="kaac" value="0.05" constant="true"/>
+      <parameter id="kaac_p" value="2.0" constant="true"/>
+      <parameter id="kiac" value="0.01" constant="true"/>
+      <parameter id="kiac_p" value="15.0" constant="true"/>
+      <parameter id="kapai" value="0.02" constant="true"/>
+      <parameter id="kapai_p" value="1.0" constant="true"/>
+      <parameter id="kipai" value="0.25" constant="true"/>
+      <parameter id="kipai_p" value="20.0" constant="true"/>
+      <parameter id="kipai_pp" value="0.0" constant="true"/>
+      <parameter id="kipai_ppp" value="2.0" constant="true"/>
+      <parameter id="pAUINT" value="1.0" constant="true"/>
+      <parameter id="AUINT" value="1.0" constant="true"/>
+      <parameter id="JAUIN" value="0.2" constant="true"/>
+      <parameter id="kaai" value="7.5" constant="true"/>
+      <parameter id="kiai" value="1.5" constant="true"/>
+      <parameter id="kiai_p" value="2.0" constant="true"/>
+      <parameter id="kamtor" value="0.05" constant="true"/>
+      <parameter id="kamtor_p" value="0.03" constant="true"/>
+      <parameter id="kamtor_pp" value="0.3" constant="true"/>
+      <parameter id="kimtor" value="0.01" constant="true"/>
+      <parameter id="kimtor_p" value="0.5" constant="true"/>
+      <parameter id="kimtor_pp" value="10.0" constant="true"/>
+      <parameter id="mtoT" value="1.0" constant="true"/>
+      <parameter id="AUEXT" value="1.0" constant="true"/>
+      <parameter id="JAUEX" value="0.2" constant="true"/>
+      <parameter id="kaax" value="0.075" constant="true"/>
+      <parameter id="kaax_p" value="0.15" constant="true"/>
+      <parameter id="kaax_pp" value="2.0" constant="true"/>
+      <parameter id="kiax" value="0.1" constant="true"/>
+      <parameter id="kiax_p" value="20.0" constant="true"/>
+      <parameter id="kiax_pp" value="20.0" constant="true"/>
+      <parameter id="Jdea" value="0.1" constant="true"/>
+      <parameter id="kade" value="0.0" constant="true"/>
+      <parameter id="kade_p" value="0.5" constant="true"/>
+      <parameter id="kade_pp" value="0.05" constant="true"/>
+      <parameter id="kade_ppp" value="0.005" constant="true"/>
+      <parameter id="kide" value="0.01" constant="true"/>
+      <parameter id="kide_p" value="30.0" constant="true"/>
+      <parameter id="stress" value="0.0" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="net_AUCO" reversible="true" fast="false">
+        <listOfProducts><speciesReference species="AUCO" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><divide/><apply><times/><apply><minus/><ci> AUCO </ci></apply><apply><plus/><ci> kiac </ci><apply><times/><ci> kiac_p </ci><ci> mTOR </ci></apply></apply></apply><apply><plus/><ci> AUCO </ci><ci> JAUCO </ci></apply></apply><apply><divide/><apply><times/><apply><plus/><apply><minus/><ci> AUCO </ci></apply><ci> AUCOT </ci></apply><apply><plus/><apply><times/><ci> AUIN </ci><ci> kaac_p </ci></apply><ci> kaac </ci></apply></apply><apply><plus/><apply><plus/><apply><minus/><ci> AUCO </ci></apply><ci> AUCOT </ci></apply><ci> JAUCO </ci></apply></apply></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="net_AUIN" reversible="true" fast="false">
+        <listOfProducts><speciesReference species="AUIN" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><divide/><apply><times/><apply><minus/><ci> AUIN </ci></apply><apply><plus/><ci> kiai </ci><apply><times/><ci> kiai_p </ci><ci> mTOR </ci></apply></apply></apply><apply><plus/><ci> AUIN </ci><ci> JAUIN </ci></apply></apply><apply><divide/><apply><times/><apply><times/><ci> kaai </ci><ci> pAUIN </ci></apply><apply><plus/><apply><minus/><ci> AUIN </ci></apply><ci> AUINT </ci></apply></apply><apply><plus/><apply><plus/><apply><minus/><ci> AUIN </ci></apply><ci> AUINT </ci></apply><ci> JAUIN </ci></apply></apply></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="net_mTOR" reversible="true" fast="false">
+        <listOfProducts><speciesReference species="mTOR" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><times/><apply><minus/><ci> mTOR </ci></apply><apply><plus/><apply><plus/><apply><times/><ci> AUCO </ci><ci> kimtor_pp </ci></apply><apply><times/><ci> AUIN </ci><ci> kimtor_p </ci></apply></apply><ci> kimtor </ci></apply></apply><apply><times/><apply><plus/><apply><minus/><ci> mTOR </ci></apply><ci> mtoT </ci></apply><apply><plus/><apply><plus/><apply><times/><ci> DEATH </ci><ci> kamtor_pp </ci></apply><ci> kamtor </ci></apply><apply><divide/><apply><times/><ci> kamtor_p </ci><ci> stress </ci></apply><apply><plus/><ci> stress </ci><cn> 1 </cn></apply></apply></apply></apply></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="net_pAUIN" reversible="true" fast="false">
+        <listOfProducts><speciesReference species="pAUIN" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><times/><apply><minus/><ci> pAUIN </ci></apply><apply><plus/><apply><plus/><apply><plus/><apply><times/><ci> AUCO </ci><ci> kipai_p </ci></apply><apply><times/><ci> DEATH </ci><ci> kipai_ppp </ci></apply></apply><ci> kipai </ci></apply><apply><times/><ci> kipai_pp </ci><ci> mTOR </ci></apply></apply></apply><apply><times/><apply><plus/><ci> kapai </ci><apply><divide/><apply><times/><ci> kapai_p </ci><ci> stress </ci></apply><apply><plus/><ci> stress </ci><cn> 1 </cn></apply></apply></apply><apply><plus/><apply><minus/><ci> pAUIN </ci></apply><ci> pAUINT </ci></apply></apply></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="net_DEATH" reversible="true" fast="false">
+        <listOfProducts><speciesReference species="DEATH" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><divide/><apply><times/><apply><minus/><ci> DEATH </ci></apply><apply><plus/><apply><times/><ci> AUEX </ci><ci> kide_p </ci></apply><ci> kide </ci></apply></apply><apply><plus/><ci> DEATH </ci><ci> Jdea </ci></apply></apply><apply><divide/><apply><times/><apply><minus/><cn> 1 </cn><ci> DEATH </ci></apply><apply><plus/><apply><plus/><apply><plus/><apply><times/><ci> AUCO </ci><ci> kade_p </ci></apply><ci> kade </ci></apply><apply><times/><ci> kade_pp </ci><ci> stress </ci></apply></apply><apply><times/><ci> kade_ppp </ci><ci> mTOR </ci></apply></apply></apply><apply><plus/><apply><plus/><apply><minus/><ci> DEATH </ci></apply><ci> Jdea </ci></apply><cn> 1 </cn></apply></apply></apply></math></kineticLaw>
+      </reaction>
+      <reaction id="net_AUEX" reversible="true" fast="false">
+        <listOfProducts><speciesReference species="AUEX" stoichiometry="1" constant="true"/></listOfProducts>
+        <kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><divide/><apply><times/><apply><minus/><ci> AUEX </ci></apply><apply><plus/><apply><plus/><apply><times/><ci> DEATH </ci><ci> kiax_pp </ci></apply><ci> kiax </ci></apply><apply><times/><ci> kiax_p </ci><ci> mTOR </ci></apply></apply></apply><apply><plus/><ci> AUEX </ci><ci> JAUEX </ci></apply></apply><apply><divide/><apply><times/><apply><plus/><apply><minus/><ci> AUEX </ci></apply><ci> AUEXT </ci></apply><apply><plus/><apply><plus/><apply><times/><ci> AUCO </ci><ci> kaax_p </ci></apply><apply><times/><ci> AUIN </ci><ci> kaax_pp </ci></apply></apply><ci> kaax </ci></apply></apply><apply><plus/><apply><plus/><apply><minus/><ci> AUEX </ci></apply><ci> AUEXT </ci></apply><ci> JAUEX </ci></apply></apply></apply></math></kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

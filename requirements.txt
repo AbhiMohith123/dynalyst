@@ -1,0 +1,50 @@
+# Core numerics / SBML / plotting (both pipelines)
+numpy
+scipy
+sympy
+python-libsbml
+pandas
+matplotlib
+plotly
+nbformat>=4.2   # plotly needs it to draw figures inside a notebook (fig.show())
+openpyxl
+
+# Agents
+langchain>=1.0
+langchain-core
+langchain-openai        # also any OpenAI-compatible endpoint: vLLM, NVIDIA API, ...
+langchain-anthropic
+langchain-ollama        # local open models through Ollama (ollama:<model>)
+langchain-google-genai  # Gemini (google_genai:<model>)
+openai
+anthropic
+
+# Notebook UI
+ipython
+ipywidgets
+jupyterlab
+
+# jaxkineticmodel runtime (the package itself is installed from
+# vendor/jaxkineticmodel with --no-deps; these are the pieces its
+# simulation / SBML code needs)
+jax==0.4.35
+jaxlib==0.4.35
+diffrax
+equinox
+optax==0.2.3
+
+# RAG knowledge base (retrieval + index building; install torch first on a
+# GPU machine -- see setup_env.sh)
+chromadb
+sentence-transformers
+rank-bm25
+pymupdf
+tqdm
+beautifulsoup4
+requests
+
+# Reaction network theory: install separately WITHOUT its pinned deps
+#   pip install --no-deps "crnt4sbml==0.0.15"
+
+# Tests
+pytest

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model id="p_dynamics" name="p_dynamics - Protein autoregulation, Michaelis-Menten (Sriram 2026, Example 2)">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <p>Dimensionless protein autoregulation model (Michaelis-Menten positive
+feedback), Example 2 of Sriram, &quot;Graphical Analysis of Ordinary Differential
+Equations in Biochemical Kinetics&quot;.</p>
+        <p>Dimensional scheme: R1: production, v_f = k1*P/(K+P) (autocatalytic
+production); R2: P -&gt; degradation, v_r = k2*P (first-order loss).</p>
+        <p>Nondimensionalised with p = P/P0, P0 = K, tau = t/t0, t0 = 1/k2,
+alpha = k1/(k2*K):  dp/dtau = alpha*p/(1+p) - p.</p>
+        <p>Encoded here as two explicit reactions (production, degradation) with
+reaction-level kineticLaws, matching the reaction-based SBML convention used
+in Garde2020.xml, so that reaction/stoichiometry-based SBML importers can
+recover v1(p) = alpha*p/(1+p) and v2(p) = p for rate-balance plots
+(V1, V2 vs p).</p>
+      </body>
+    </notes>
+    <listOfCompartments>
+      <compartment id="cell" name="cell" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="p" name="Dimensionless protein concentration" compartment="cell" initialConcentration="0.1" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="alpha" name="Dimensionless feedback strength (k1/(k2*K))" value="1.5" constant="true"/>
+      <parameter id="k2" name="Dimensionless degradation rate constant" value="1" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="production" name="Autocatalytic Michaelis-Menten production of p" reversible="false" fast="false">
+        <listOfProducts>
+          <speciesReference species="p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> cell </ci>
+                <ci> alpha </ci>
+                <ci> p </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <cn type="integer"> 1 </cn>
+                <ci> p </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="degradation" name="First-order degradation of p" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="p" stoichiometry="1"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> cell </ci>
+              <ci> k2 </ci>
+              <ci> p </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

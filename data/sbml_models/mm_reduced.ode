@@ -1,0 +1,9 @@
+# Reduced Michaelis-Menten model (guide's "second form"), as in SSA_MM_RED.m
+# inflow -> S, S -> P (enzyme E in quasi-steady state), P -> outflow
+# Units: nM, min. Steady state: S* = Km*vs/(vm-vs), P* = vs/vd.
+par vs=0.1, vm=1, Km=2, vd=0.1
+S'=vs - vm*S/(Km+S)
+P'=vm*S/(Km+S) - vd*P
+init S=0, P=0
+@ total=100
+done

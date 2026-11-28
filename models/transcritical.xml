@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model id="transcritical_MM_autoregulation">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <p>dp/dtau = alpha*P/(1+P) - P. Michaelis-Menten positive autoregulation (Sriram 2026, Example 2). Known transcritical bifurcation at alpha=1: P=0 stable for alpha&lt;1, unstable for alpha&gt;1, exchanging stability with branch P=alpha-1.</p>
+      </body>
+    </notes>
+    <listOfCompartments>
+      <compartment id="c" spatialDimensions="3" size="1" units="litre" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="P" compartment="c" initialAmount="0.3" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="alpha" value="1.5" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="R1_production" reversible="false">
+        <listOfProducts>
+          <speciesReference species="P" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> alpha </ci>
+                <ci> P </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <cn type="integer"> 1 </cn>
+                <ci> P </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="R2_loss" reversible="false">
+        <listOfReactants>
+          <speciesReference species="P" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> P </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

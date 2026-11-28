@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model>
+    <listOfCompartments>
+      <compartment id="compartment" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="v" compartment="compartment" initialAmount="-1" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="w" compartment="compartment" initialAmount="1" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="I" value="0.5" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="dv_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="v" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="w"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <ci> I </ci>
+              <ci> v </ci>
+              <apply>
+                <times/>
+                <cn type="integer"> -1 </cn>
+                <ci> w </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn type="rational"> -1 <sep/> 3 </cn>
+                <apply>
+                  <power/>
+                  <ci> v </ci>
+                  <cn type="integer"> 3 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="dw_dt" reversible="false">
+        <listOfProducts>
+          <speciesReference species="w" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="v"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <cn> 0.056 </cn>
+              <apply>
+                <times/>
+                <cn> 0.08 </cn>
+                <ci> v </ci>
+              </apply>
+              <apply>
+                <times/>
+                <cn> -0.064 </cn>
+                <ci> w </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

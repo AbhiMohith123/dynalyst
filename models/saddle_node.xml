@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model id="saddle_node_Hill_autoregulation">
+    <notes>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <p>dp/dtau = alpha*P^2/(1+P^2) - P. Hill (n=2) positive autoregulation (Sriram 2026, Example 3). Known saddle-node bifurcation at alpha=2 (P=1): for alpha&lt;2 only P=0 is real and stable; for alpha&gt;2 two more equilibria appear, bistable.</p>
+      </body>
+    </notes>
+    <listOfCompartments>
+      <compartment id="c" spatialDimensions="3" size="1" units="litre" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="P" compartment="c" initialAmount="0.5" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="alpha" value="3" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="R1_production" reversible="false">
+        <listOfProducts>
+          <speciesReference species="P" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> alpha </ci>
+                <apply>
+                  <power/>
+                  <ci> P </ci>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+              <apply>
+                <plus/>
+                <cn type="integer"> 1 </cn>
+                <apply>
+                  <power/>
+                  <ci> P </ci>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="R2_loss" reversible="false">
+        <listOfReactants>
+          <speciesReference species="P" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> P </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
