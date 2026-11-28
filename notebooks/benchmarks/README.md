@@ -61,8 +61,8 @@ setup cell, type `google_genai:gemini-3.5-flash-lite`, and give a Google AI Stud
 `eval_adversarial` and `eval_further_models` with it.
 
 **Not in these notebooks.** The baselines and robustness runs of S1 File, Section S11 (the fixed pipeline without a
-language model, the single flat agent, the ablations, the repair and route checks) need switches of the evaluation
-build, which is archived with the paper's run records on Zenodo. The Talk2Biomodels side of RQ5 was run in
+language model, the single flat agent, the ablations, the repair and route checks) need switches of a separate
+evaluation build that is not part of this repository. The Talk2Biomodels side of RQ5 was run in
 Talk2Biomodels' own web interface.
 
 ## What each group of IDs covers

@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/dynalyst26/dynalyst/releases"><img alt="release v1.0.1" src="https://img.shields.io/badge/release-v1.0.1-c4b5fd?style=flat-square&labelColor=ede9fe"></a> <a href="pyproject.toml"><img alt="python ≥ 3.10" src="https://img.shields.io/badge/python-%E2%89%A5%203.10-93c5fd?style=flat-square&labelColor=dbeafe"></a> <a href="LICENSE"><img alt="license MIT" src="https://img.shields.io/badge/license-MIT-86efac?style=flat-square&labelColor=dcfce7"></a> <a href="#bifurcation-analysis-auto-07p"><img alt="continuation AUTO-07p" src="https://img.shields.io/badge/continuation-AUTO--07p-f9a8d4?style=flat-square&labelColor=fce7f3"></a> <a href="INSTALL.md"><img alt="runs on Linux | macOS | Windows" src="https://img.shields.io/badge/runs%20on-Linux%20%7C%20macOS%20%7C%20Windows-fcd34d?style=flat-square&labelColor=fef3c7"></a> <a href="#model-inputs-and-saving"><img alt="models SBML · XPPAUT · ODEs" src="https://img.shields.io/badge/models-SBML%20%C2%B7%20XPPAUT%20%C2%B7%20ODEs-fdba74?style=flat-square&labelColor=ffedd5"></a>
+  <a href="CITATION.cff"><img alt="version 1.0.1" src="https://img.shields.io/badge/version-1.0.1-c4b5fd?style=flat-square&labelColor=ede9fe"></a> <a href="pyproject.toml"><img alt="python ≥ 3.10" src="https://img.shields.io/badge/python-%E2%89%A5%203.10-93c5fd?style=flat-square&labelColor=dbeafe"></a> <a href="LICENSE"><img alt="license MIT" src="https://img.shields.io/badge/license-MIT-86efac?style=flat-square&labelColor=dcfce7"></a> <a href="#bifurcation-analysis-auto-07p"><img alt="continuation AUTO-07p" src="https://img.shields.io/badge/continuation-AUTO--07p-f9a8d4?style=flat-square&labelColor=fce7f3"></a> <a href="INSTALL.md"><img alt="runs on Linux | macOS | Windows" src="https://img.shields.io/badge/runs%20on-Linux%20%7C%20macOS%20%7C%20Windows-fcd34d?style=flat-square&labelColor=fef3c7"></a> <a href="#model-inputs-and-saving"><img alt="models SBML · XPPAUT · ODEs" src="https://img.shields.io/badge/models-SBML%20%C2%B7%20XPPAUT%20%C2%B7%20ODEs-fdba74?style=flat-square&labelColor=ffedd5"></a>
 </p>
 
 <p align="center">
@@ -870,8 +870,7 @@ outputs/                 everything the tools write (created on first use)
 ```
 
 The prompts of the paper are in `notebooks/benchmarks/`, one notebook per part of the paper
-(see its `README.md`). The evaluation scripts, reference implementations and run records are
-not in this repository; they are in the Zenodo archive of the paper (see [Citing](#citing)).
+(see its `README.md`).
 
 `models/` is separate from `data/sbml_models/` on purpose: `pitchfork.xml` and
 `transcritical.xml` exist in both with different models inside.
@@ -949,16 +948,6 @@ measured by the experiments in the paper, with real models and recorded runs.
 
 Please cite the software (`CITATION.cff`; GitHub shows it under "Cite this repository")
 and the paper that describes it.
-
-> [!IMPORTANT]
-> The paper's runs were made with release v1.0.0, which is
-> archived on Zenodo together with the paper's evaluation scripts, reference implementations
-> and run records. This release, v1.0.1, differs from it in two defaults: a diagram given no
-> range sweeps 10^-3 to 10^3 times the parameter's value on a log axis (v1.0.0: one decade
-> either side, widened to three and five), and the limit cycles born at a Hopf point are
-> continued in the same run (v1.0.0 asked first in a chat). It also fixes how conservation
-> laws are written as total amounts. Numbers the tools compute (fold and Hopf points, steady
-> states, periods) are the same.
 
 <p align="center"><img src="docs/divider.png" alt="" width="100%" height="6"></p>
 
